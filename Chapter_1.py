@@ -42,7 +42,8 @@ for i in range(1, param_num):
     E_rms_test = np.append(E_rms_test, np.sqrt(2 * error(res.x, x_test, t_test)/len(x_test)))
     
 
-weights = np.ones(11) 
+# Here I've picked param_num = 4 as an instructive example for plotting.
+weights = np.ones(4) 
 res = minimize(error, weights, args=(x_train, t_train), tol=1e-6)
 
 # Plot the data, the fit and the function, which generated the data.
@@ -53,6 +54,8 @@ plt.legend()
 plt.xlabel('x')
 plt.ylabel('t')
 plt.show()
+
+# Plot the RMS for the test and training sets
 xax = np.linspace(1, param_num, num=param_num-1)
 plt.plot(xax, E_rms_train, label='Train set', marker='o', markersize=10)
 plt.plot(xax, E_rms_test, label='Test set', marker='o', markersize=10)
@@ -62,6 +65,4 @@ plt.ylabel('E_rms')
 plt.show()
 
 
-E_rms = np.sqrt(2 * error(weights, x_test, t_test)/len(x_test))
-print(E_rms)
 
